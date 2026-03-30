@@ -1,6 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
 import SocialPost from './components/molecules/SocialPost.vue';
+import TheHeader from './components/organisms/TheHeader.vue';
 const posts = reactive([
   {
     username: 'Username one',
@@ -18,6 +19,7 @@ const posts = reactive([
 </script>
 
 <template>
+  <TheHeader></TheHeader>
   <SocialPost
     :username="posts[0].username"
     :user-id="posts[0].userId"
