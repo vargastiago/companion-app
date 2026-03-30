@@ -9,6 +9,12 @@ import SocialPost from './components/molecules/SocialPost.vue';
     avatar-src="https://i.pravatar.cc/40"
     post="This is my post"
   ></SocialPost>
+  <SocialPost
+    username="Username two"
+    user-id="usernameID2"
+    avatar-src="https://i.pravatar.cc/40"
+    post="This is my second post"
+  ></SocialPost>
 </template>
 
 <style></style>
