@@ -8,29 +8,30 @@ const posts = reactive([
     userId: 'usernameID1',
     avatarSrc: 'https://i.pravatar.cc/40',
     post: 'This is my post',
+    comments: ['great post', 'amazing post'],
+    tags: ['tag 1'],
   },
   {
     username: 'Username two',
     userId: 'usernameID2',
     avatarSrc: 'https://i.pravatar.cc/40',
     post: 'This is my second post',
+    comments: [],
+    tags: ['tag 1', 'tag 2'],
   },
 ]);
 </script>
 
 <template>
-  <TheHeader></TheHeader>
+  <TheHeader />
   <SocialPost
-    :username="posts[0].username"
-    :user-id="posts[0].userId"
-    :avatar-src="posts[0].avatarSrc"
-    :post="posts[0].post"
-  ></SocialPost>
-  <SocialPost
-    :username="posts[1].username"
-    :user-id="posts[1].userId"
-    :avatar-src="posts[1].avatarSrc"
-    :post="posts[1].post"
+    v-for="post in posts"
+    :username="post.username"
+    :user-id="post.userId"
+    :avatar-src="post.avatarSrc"
+    :post="post.post"
+    :comments="post.comments"
+    :key="post.userId"
   ></SocialPost>
 </template>
 
