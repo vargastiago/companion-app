@@ -1,9 +1,14 @@
 <script setup>
-import SocialPost from './components/molecules/SocialPost.vue'
+import SocialPost from './components/molecules/SocialPost.vue';
 </script>
 
 <template>
-  <SocialPost></SocialPost>
+  <SocialPost
+    username="Username one"
+    user-id="usernameID1"
+    avatar-src="https://i.pravatar.cc/40"
+    post="This is my post"
+  ></SocialPost>
 </template>
 
 <style></style>
