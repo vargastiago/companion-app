@@ -1,14 +1,12 @@
 <template>
-  <div class="SocialPost" :class="{ SocialPost__selected: selected }" @click="selected = !selected">
+  <div class="SocialPost" :class="{ SocialPost__selected: selected }" @click="onSelectedClik">
     <div class="header">
       <img class="avatar" :src="avatarSrc" />
       <div class="name">{{ username }}</div>
       <div class="userId">{{ userId }}</div>
     </div>
     <div class="post">{{ post }}</div>
-    <button v-show="comments.length > 0" @click="showComments = !showComments">
-      Show comments
-    </button>
+    <button v-show="comments.length > 0" @click="onShowCommentClick">Show comments</button>
     <SocialPostComments v-if="showComments" :comments="comments" />
   </div>
 </template>
@@ -18,7 +16,14 @@ import { onMounted, ref } from 'vue';
 import SocialPostComments from './SocialPostComments.vue';
 
 const selected = ref(false);
+const onSelectedClik = () => {
+  selected.value = !selected.value;
+};
 const showComments = ref(false);
+const onShowCommentClick = () => {
+  console.log('Showing comments');
+  showComments.value = !showComments.value;
+};
 const props = defineProps({
   username: String,
   userId: String,
