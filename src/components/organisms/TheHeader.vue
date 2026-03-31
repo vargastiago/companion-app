@@ -18,15 +18,24 @@ const username = ref('Zelig880');
 
 <style lang="scss">
 header {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   grid-column-start: 1;
   grid-column-end: 3;
   margin-bottom: 24px;
+  border-bottom: solid 1px var(--color-border);
 
-  a span {
-    font-weight: bold;
+  .span {
+    display: flex;
+  }
+
+  a {
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 8px;
+    font-weight: bolder;
   }
 }
 </style>
