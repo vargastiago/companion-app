@@ -1,5 +1,5 @@
 <template>
-  <div class="SocialPost" :class="{ SocialPost__selected: selected }" @click="onSelectedClik">
+  <div class="SocialPost" :class="{ SocialPost__selected: selected }" @click="onSelectedClick">
     <div class="header">
       <img class="avatar" :src="avatarSrc" />
       <div class="name">{{ username }}</div>
@@ -17,7 +17,7 @@ import { onMounted, ref, computed } from 'vue';
 import SocialPostComments from './SocialPostComments.vue';
 
 const selected = ref(false);
-const onSelectedClik = () => {
+const onSelectedClick = () => {
   selected.value = !selected.value;
 };
 
