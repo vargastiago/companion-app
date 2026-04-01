@@ -13,7 +13,12 @@
       {{ interactions }}
       <IconCommunity />
       {{ commentsNumber }}
-      <button v-show="hasComments" @click="onShowCommentClick">Show comments</button>
+      <TheButton
+        v-show="hasComments"
+        @click="onShowCommentClick"
+        value="Show comment"
+        width="auto"
+      />
     </div>
   </div>
 </template>
@@ -24,6 +29,7 @@ import SocialPostComments from './SocialPostComments.vue';
 import IconDelete from '../icons/IconDelete.vue';
 import IconHeart from '../icons/IconHeart.vue';
 import IconCommunity from '../icons/IconCommunity.vue';
+import TheButton from '../atoms/TheButton.vue';
 
 const selected = ref(false);
 const onSelectedClick = () => {
