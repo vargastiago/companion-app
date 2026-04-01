@@ -4,7 +4,7 @@
       <img class="avatar" :src="avatarSrc" />
       <div class="name">{{ username }}</div>
       <div class="userId">{{ userId }}</div>
-      <IconDelete />
+      <IconDelete @click="onDeleteClick" />
     </div>
     <div class="post">{{ post }}</div>
     <SocialPostComments v-if="showComments" :comments="comments" />
@@ -61,6 +61,11 @@ const interactions = computed(() => {
 onMounted(() => {
   console.log(props.username);
 });
+
+const emit = defineEmits(['delete']);
+const onDeleteClick = () => {
+  emit('delete');
+};
 </script>
 
 <style lang="scss">
