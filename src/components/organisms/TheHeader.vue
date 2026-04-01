@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import TheLogo from '../atom/TheLogo.vue';
+import TheLogo from '../atoms/TheLogo.vue';
 
 const username = ref('Zelig880');
 </script>
