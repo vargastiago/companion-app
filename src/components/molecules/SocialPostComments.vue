@@ -1,19 +1,43 @@
 <template>
   <div class="SocialPostComments">
-    <p>Comments:</p>
-    <div v-for="(comment, index) in comments" :key="index" class="comment">
-      <p>{{ comment }}</p>
-      <IconDelete />
-    </div>
+    <template v-if="comments.length === 0">
+      <p>There are no comments for this post!</p>
+    </template>
+    <template v-else>
+      <p>Comments:</p>
+      <div v-for="comment in comments" :key="comment.id" class="comment">
+        <p>
+          {{ comment.username }}: <strong>{{ comment.body }}</strong>
+        </p>
+      </div>
+    </template>
   </div>
 </template>
 
 <script setup>
-import IconDelete from '../icons/IconDelete.vue';
+import { reactive } from 'vue';
 
-defineProps({
-  comments: Array,
+const props = defineProps({
+  postId: Number,
 });
+
+const comments = reactive([]);
+const fetchComments = postId => {
+  const baseUrl = 'https://dummyjson.com/';
+
+  fetch(`${baseUrl}comments/post/${postId}`)
+    .then(response => response.json())
+    .then(result => {
+      const commentsWithUser = result.comments.map(comment => ({
+        id: comment.id,
+        body: comment.body,
+        username: comment.user.username,
+      }));
+      comments.splice(0, comments.length, ...commentsWithUser);
+    });
+};
+
+fetchComments(props.postId);
 </script>
 
 <style lang="scss">

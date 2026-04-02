@@ -6,23 +6,20 @@
       <IconDelete @click="onDeleteClick" />
     </div>
     <div class="post">{{ post }}</div>
-    <SocialPostComments v-if="showComments" :comments="comments" />
+    <SocialPostComments v-if="showComments" :post-id="id" />
     <div class="interactions">
       <IconHeart />
       {{ likes }}
-      <IconCommunity />
-      {{ commentsNumber }}
       <TheButton @click="onShowCommentClick" value="Show comment" width="auto" theme="dark" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref } from 'vue';
 import SocialPostComments from './SocialPostComments.vue';
 import IconDelete from '../icons/IconDelete.vue';
 import IconHeart from '../icons/IconHeart.vue';
-import IconCommunity from '../icons/IconCommunity.vue';
 import TheButton from '../atoms/TheButton.vue';
 
 const showComments = ref(false);
@@ -31,20 +28,12 @@ const onShowCommentClick = () => {
   showComments.value = !showComments.value;
 };
 
-const commentsNumber = computed(() => {
-  return props.comments.length;
-});
-
 const props = defineProps({
   username: String,
   id: Number,
   avatarSrc: String,
   post: String,
   likes: Number,
-  comments: {
-    type: Array,
-    default: () => [],
-  },
 });
 
 onMounted(() => {
