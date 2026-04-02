@@ -1,24 +1,18 @@
 <template>
-  <div class="SocialPost" :class="{ SocialPost__selected: selected }" @click="onSelectedClick">
+  <div class="SocialPost" :class="{ SocialPost__selected: selected }">
     <div class="header">
       <img class="avatar" :src="avatarSrc" />
       <div class="name">{{ username }}</div>
-      <div class="userId">{{ userId }}</div>
       <IconDelete @click="onDeleteClick" />
     </div>
     <div class="post">{{ post }}</div>
     <SocialPostComments v-if="showComments" :comments="comments" />
     <div class="interactions">
       <IconHeart />
-      {{ interactions }}
+      {{ likes }}
       <IconCommunity />
       {{ commentsNumber }}
-      <TheButton
-        v-show="hasComments"
-        @click="onShowCommentClick"
-        value="Show comment"
-        width="auto"
-      />
+      <TheButton @click="onShowCommentClick" value="Show comment" width="auto" theme="dark" />
     </div>
   </div>
 </template>
@@ -30,11 +24,6 @@ import IconDelete from '../icons/IconDelete.vue';
 import IconHeart from '../icons/IconHeart.vue';
 import IconCommunity from '../icons/IconCommunity.vue';
 import TheButton from '../atoms/TheButton.vue';
-
-const selected = ref(false);
-const onSelectedClick = () => {
-  selected.value = !selected.value;
-};
 
 const showComments = ref(false);
 const onShowCommentClick = () => {
@@ -48,20 +37,14 @@ const commentsNumber = computed(() => {
 
 const props = defineProps({
   username: String,
-  userId: String,
+  id: Number,
   avatarSrc: String,
   post: String,
   likes: Number,
-  retweets: Number,
-  comments: Array,
-});
-
-const hasComments = computed(() => {
-  return props.comments.length > 0;
-});
-
-const interactions = computed(() => {
-  return props.comments.length + props.likes + props.retweets;
+  comments: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 onMounted(() => {
@@ -76,6 +59,7 @@ const onDeleteClick = () => {
 
 <style lang="scss">
 .SocialPost {
+  margin-bottom: 16px;
   &__selected {
     border: black solid 1px;
   }
@@ -86,6 +70,8 @@ const onDeleteClick = () => {
   }
   .avatar {
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
     margin-right: 12px;
   }
   .name {
@@ -100,7 +86,8 @@ const onDeleteClick = () => {
     svg {
       width: 24px;
       height: 24px;
-      fill: var(--color-border);
+      fill: var(--color-input-soft);
+      cursor: pointer;
     }
   }
 }
