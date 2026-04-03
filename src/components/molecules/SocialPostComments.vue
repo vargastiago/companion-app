@@ -22,10 +22,10 @@ const props = defineProps({
 });
 
 const comments = reactive([]);
-const fetchComments = postId => {
+const fetchComments = async postId => {
   const baseUrl = 'https://dummyjson.com/';
 
-  fetch(`${baseUrl}comments/post/${postId}`)
+  return fetch(`${baseUrl}comments/post/${postId}`)
     .then(response => response.json())
     .then(result => {
       const commentsWithUser = result.comments.map(comment => ({
@@ -37,7 +37,7 @@ const fetchComments = postId => {
     });
 };
 
-fetchComments(props.postId);
+await fetchComments(props.postId);
 </script>
 
 <style lang="scss">

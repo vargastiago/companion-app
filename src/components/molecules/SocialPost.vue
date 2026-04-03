@@ -6,7 +6,10 @@
       <IconDelete @click="onDeleteClick" />
     </div>
     <div class="post">{{ post }}</div>
-    <SocialPostComments v-if="showComments" :post-id="id" />
+    <Suspense v-if="showComments">
+      <SocialPostComments :post-id="id" />
+      <template #fallback> fetching comments... </template>
+    </Suspense>
     <div class="interactions">
       <IconHeart />
       {{ likes }}
