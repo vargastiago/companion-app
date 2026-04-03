@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import SocialPost from '../molecules/SocialPost.vue';
 
 const onDelete = postIndex => {
@@ -20,9 +20,19 @@ const onDelete = postIndex => {
 };
 
 const posts = reactive([]);
-const fetchPosts = () => {
+const page = ref(1);
+watch(posts, newValue => {
+  if (newValue.length <= 3) {
+    page.value++;
+    fetchPosts(page.value);
+  }
+});
+const fetchPosts = page => {
   const baseUrl = 'https://dummyjson.com';
-  fetch(`${baseUrl}/posts?limit=5`)
+  const limit = 5;
+  const skip = Math.max(0, (page - 1) * limit);
+
+  fetch(`${baseUrl}/posts?limit=${limit}&skip=${skip}`)
     .then(postsResponse => postsResponse.json())
     .then(postsData => {
       // Get unique user IDs from posts
@@ -51,5 +61,5 @@ const fetchPosts = () => {
     });
 };
 
-fetchPosts();
+fetchPosts(page.value);
 </script>
